@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fool_sportswear/menu.dart';
+import 'package:fool_sportswear/screens/menu.dart';
 
 void main() {
   runApp(const MyApp());
