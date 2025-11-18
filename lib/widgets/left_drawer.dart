@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fool_sportswear/screens/menu.dart';
 import 'package:fool_sportswear/screens/productlist_form.dart';
 import 'package:fool_sportswear/widgets/product_card.dart';
+import 'package:fool_sportswear/screens/product_entry_list.dart';
 
 class LeftDrawer extends StatelessWidget {
   const LeftDrawer({super.key});
@@ -13,7 +14,7 @@ class LeftDrawer extends StatelessWidget {
         children: [
           const DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: const Color(0xFF6A1B9A),
             ),
             child: Column(
               children: [
@@ -59,21 +60,21 @@ class LeftDrawer extends StatelessWidget {
               Navigator.pushReplacement(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ProductFormPage(),
-                  ));
+                    builder: (context) => const ProductFormPage()),
+                  );
             },
-          )
-          // ListTile(
-          //   leading: const Icon(Icons.newspaper),
-          //   title: const Text('See Products'),
-          //   onTap: () {
-          //     Navigator.pushReplacement(
-          //         context,
-          //         MaterialPageRoute(
-          //           builder: (context) => MyHomePage(),
-          //         ));
-          //   },
-          // )
+          ),
+          ListTile(
+            leading: const Icon(Icons.add_reaction_rounded),
+            title: const Text('Product List'),
+            onTap: () {
+              // Route to news list page
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProductEntryListPage()),
+              );
+            },
+          ),
         ],
       ),
     );

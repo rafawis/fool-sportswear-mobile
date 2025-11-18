@@ -52,3 +52,57 @@ TUGAS 8
 
 4. Bagaimana kamu menyesuaikan warna tema agar aplikasi Football Shop memiliki identitas visual yang konsisten dengan brand toko?
    Contohnya dari item homepage, kita membuatnya jadi itemnya memiliki atribut color, jadi kita bisa kustomisasi warna button jadi biru, merah, hijau. selain itu dipake untuk font-color, dan background color di scaffold, sehingga seluruh aplikasi memiliki warna yang konsisten sesuai brand toko.
+
+TUGAS 9
+
+1. Jelaskan mengapa kita perlu membuat model Dart saat mengambil/mengirim data JSON? Apa konsekuensinya jika langsung memetakan Map<String, dynamic> tanpa model (terkait validasi tipe, null-safety, maintainability)?
+   dapat validasi datatype, null safety, dan maintainability kode lebih baik. Kalau hanya memakai map, tidak ada validasi tipedata, harus selalu makai null check, dan sulit untuk refactor code
+
+2. Apa fungsi package http dan CookieRequest dalam tugas ini? Jelaskan perbedaan peran http vs CookieRequest.
+   http hanya untuk request HTTP biasa, sedangkan cookierequest untuk request yang membutuhkan session management, seperti autentikasi dengan cookie.
+
+3. Jelaskan mengapa instance CookieRequest perlu untuk dibagikan ke semua komponen di aplikasi Flutter.
+   Instance cookierequest harus dibagikan agar sesi penggunaan tetap konsisten di seluruh aplikasi, sehingga user tidak perlu login berulang kali di setiap halaman.
+   
+4. Jelaskan konfigurasi konektivitas yang diperlukan agar Flutter dapat berkomunikasi dengan Django. Mengapa kita perlu menambahkan 10.0.2.2 pada ALLOWED_HOSTS, mengaktifkan CORS dan pengaturan SameSite/cookie, dan menambahkan izin akses internet di Android? Apa yang akan terjadi jika konfigurasi tersebut tidak dilakukan dengan benar?
+   - menambah 10.0.2.2 kepada allowed hosts agar server django bisa diakses dari emulator android
+   - mengaktifkan CORS agar permintaan dari domain berbeda (flutter app) diizinkan untuk mengakses sumber daya di server django
+   - pengaturan samesite/cookie agar cookie yang ada di server django bisa dikirimkan dengan benar ke aplikasi flutter
+   - menambahkan izin akses internet di android agar aplikasi flutter bisa mengakses internet
+   kalau konfigurasi ini tidak dilakukan, aplikasi flutter tidak akan bisa berkomunikasi dengan server django, jadi fitur-fitur yang bergantung pada komunikasi server tidak bisa berfungsi.
+5. Jelaskan mekanisme pengiriman data mulai dari input hingga dapat ditampilkan pada Flutter.
+    - user menginput data di form di aplikasi flutter
+    - data tsb dimasukkin kedalam model dart
+    - model dart diubah menjadi json
+    - json dikirim ke server django dengan http/cookierequest
+    - views di django menerima data, memprosesnya, dan menyimpan ke database kalau valid
+    - ketika data berhasil disimpan, server mengirim respon balik ke aplikasi flutter
+    - aplikasi flutter menerima respon, mengubahnya kembali ke model dart
+    - data ditampilkan di UI flutter
+6. Jelaskan mekanisme autentikasi dari login, register, hingga logout. Mulai dari input data akun pada Flutter ke Django hingga selesainya proses autentikasi oleh Django dan tampilnya menu pada Flutter.
+   - Register
+     - Input data
+     - Data dikirim ke django dengan cookierequest
+     - django validasikan data, kalau valid, simpan ke database
+     - django kirim respon balik ke flutter
+   - Login
+     - input data
+     - data dikirim ke django dengan cookierequest
+     - django memverifikasi data, kalau valid, buat session dan kirim cookie balik ke flutter
+     - flutter menyimpan cookie untuk sesi autentikasi
+   - Logout
+     - mengirim request ke django untuk logout
+     - django menghapus session dan cookie
+     - flutter menghapus cookie dari penyimpanan dengan cookierequest
+     - 
+7. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial).
+   - membuat app baru di django buat authentication
+   - install app corsheaders di django agar bisa share resource cross-origin
+   - konfigurasi settings django untuk corsheaders, allowed hosts, samesite/cookie
+   - buat fungsi login,register, dan logout di django dan buat url routingnya
+   - add provider dan pbp django di flutter 
+   - add cookierequest di main agar menyimpan session
+   - buat model custom dengan json agar bisa mapping data dari json ke dart
+   - mengintegrasi list product dengan flutter dengan membuat dart file baru untuk fetch dan show products
+   - mengintegrasi detail product dengan flutter dengan membuat dart file baru untuk fetch dan show detail product
+   - mengintegrasi form input product dengan flutter dengan membuat views baru didjango untuk menagnani menerima data post dari flutter

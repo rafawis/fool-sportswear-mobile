@@ -12,8 +12,10 @@ class MyHomePage extends StatelessWidget {
   final String kelas = "E"; //kelas
   final List<ItemHomepage> items = [
     ItemHomepage("All Products", Icons.sports_soccer,Colors.blue),
-    ItemHomepage("My Products", Icons.account_circle_rounded,Colors.green),
+    ItemHomepage("My Products", Icons.inventory,Colors.green),
+    ItemHomepage("Featured Products", Icons.star,Colors.orange),
     ItemHomepage("Create Product", Icons.add,Colors.red),
+    ItemHomepage("Logout", Icons.account_circle_rounded,Colors.yellow),
   ];
   @override
   Widget build(BuildContext context) {
@@ -54,39 +56,37 @@ class MyHomePage extends StatelessWidget {
             const SizedBox(height: 16.0),
 
             // Menempatkan widget berikutnya di tengah halaman.
-            Center(
-              child: Column(
-                // Menyusun teks dan grid item secara vertikal.
-
-                children: [
-                  // Menampilkan teks sambutan dengan gaya tebal dan ukuran 18.
-                  const Padding(
-                    padding: EdgeInsets.only(top: 16.0),
-                    child: Text(
-                      'Selamat datang di Fool Sportswear',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18.0,
+            Expanded(
+              child: Center(
+                child: Column(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(top: 16.0),
+                      child: Text(
+                        'Selamat datang di Fool Sportswear',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18.0,
+                        ),
                       ),
                     ),
-                  ),
-
-                  // Grid untuk menampilkan ItemCard dalam bentuk grid 3 kolom.
-                  GridView.count(
-                    primary: true,
-                    padding: const EdgeInsets.all(20),
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    crossAxisCount: 3,
-                    // Agar grid menyesuaikan tinggi kontennya.
-                    shrinkWrap: true,
-
-                    // Menampilkan ItemCard untuk setiap item dalam list items.
-                    children: items.map((ItemHomepage item) {
-                      return ItemCard(item);
-                    }).toList(),
-                  ),
-                ],
+                    Expanded(
+                      child: Center(
+                        child: GridView.count(
+                          shrinkWrap: true,
+                          padding: const EdgeInsets.all(20),
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                          crossAxisCount: 3,
+                          childAspectRatio: 1.2,
+                          children: items.map((ItemHomepage item) {
+                            return ItemCard(item);
+                          }).toList(),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
