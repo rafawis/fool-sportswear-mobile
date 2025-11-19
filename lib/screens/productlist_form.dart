@@ -289,7 +289,7 @@ class _ProductFormPageState extends State<ProductFormPage> {
                       onPressed: () async {
                         if (_formKey.currentState!.validate()) {
                           final response = await request.postJson(
-                            "http://rafa-pradipta-foolsportswear.pbp.cs.ui.ac.id/create-flutter/",
+                            "https://rafa-pradipta-foolsportswear.pbp.cs.ui.ac.id/create-flutter/",
                             jsonEncode({
                               "name": _name,
                               "price": _price,

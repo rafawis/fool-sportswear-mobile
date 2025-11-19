@@ -27,8 +27,8 @@ class _ProductEntryListPageState extends State<ProductEntryListPage> {
   }
   Future<List<ProductEntry>> fetchNews(CookieRequest request) async {
     final url = _filterType == FilterType.my
-        ? 'http://rafa-pradipta-foolsportswear.pbp.cs.ui.ac.id/json/my/'
-        : 'http://rafa-pradipta-foolsportswear.pbp.cs.ui.ac.id/json/';
+        ? 'https://rafa-pradipta-foolsportswear.pbp.cs.ui.ac.id/json/my/'
+        : 'https://rafa-pradipta-foolsportswear.pbp.cs.ui.ac.id/json/';
 
     final response = await request.get(url);
     var data = response;

@@ -25,7 +25,7 @@ class ProductDetailPage extends StatelessWidget {
             // Thumbnail image
             if (product.thumbnail!.isNotEmpty)
               Image.network(
-                'http://rafa-pradipta-foolsportswear.pbp.cs.ui.ac.id/proxy-image/?url=${Uri.encodeComponent(product.thumbnail ?? "")}',
+                'http://localhost:8000/proxy-image/?url=${Uri.encodeComponent(product.thumbnail ?? "")}',
                 width: double.infinity,
                 height: 250,
                 fit: BoxFit.cover,
